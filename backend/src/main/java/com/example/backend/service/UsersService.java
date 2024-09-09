@@ -29,7 +29,7 @@ public class UsersService {
     }
 
     public Users findUserbyUsername(String username){
-        return usersRepo.findUserbyUsername(username);
+        return usersRepo.findUserByUsername(username);
     }
 
     public Users updateUsers(Users users){

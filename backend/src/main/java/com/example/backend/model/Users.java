@@ -4,10 +4,12 @@ import java.io.Serializable;
 import jakarta.persistence.*;
 
 @Entity
+@Table(name = "users")
 public class Users implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "users_seq")
+    @SequenceGenerator(name = "users_seq", sequenceName = "users_seq", allocationSize = 50)
     private String username;
     private String first_name;
     private String last_name;
