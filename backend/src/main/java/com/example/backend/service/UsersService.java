@@ -4,7 +4,7 @@ import com.example.backend.model.Users;
 import com.example.backend.repo.UsersRepo;
 
 import java.util.List;
-import java.util.UUID;
+
 
 import org.springframework.stereotype.*;;
 
@@ -18,7 +18,6 @@ public class UsersService {
 }
 
     public Users addUsers(Users users){
-        users.setFirst_name(UUID.randomUUID().toString());
         return usersRepo.save(users);
 
     }

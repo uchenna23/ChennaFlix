@@ -4,16 +4,24 @@ import java.io.Serializable;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "users")
+@Table(name = "users", schema = "angular_resume")
 public class Users implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "users_seq")
-    @SequenceGenerator(name = "users_seq", sequenceName = "users_seq", allocationSize = 50)
     private String username;
+
+    @Column(name = "first_name")
     private String first_name;
+
+    @Column(name = "last_name")
     private String last_name;
+
+    @Column(name = "password")
     private String password;
+
+
+    public Users() {
+    }
 
 
     public Users(String first_name, String last_name, String username, String password){
