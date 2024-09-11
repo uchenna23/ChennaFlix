@@ -4,7 +4,7 @@ import com.example.backend.model.Users;
 import com.example.backend.repo.UsersRepo;
 
 import java.util.List;
-
+import java.util.Optional;
 
 import org.springframework.stereotype.*;;
 
@@ -35,8 +35,14 @@ public class UsersService {
         return usersRepo.save(users);
     }
 
-    public Users deletUsers(String username){
-        return usersRepo.deleteUserByUsername(username);
+    public boolean deletUsers(String username){
+        Optional<Users> user = Optional.ofNullable(usersRepo.findUserByUsername(username));
+        if(user.isPresent()){
+            usersRepo.delete(user.get());
+            return true;
+        }else{
+            return false;
+        }
     }
 
 
