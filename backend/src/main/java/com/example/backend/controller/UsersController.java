@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -17,6 +18,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.backend.model.Users;
 import com.example.backend.service.UsersService;
+
+import jakarta.persistence.EntityNotFoundException;
 
 @RestController
 @RequestMapping("/users")
@@ -36,7 +39,7 @@ public class UsersController {
     }
 
     @GetMapping(value = "/find/{username}", produces = MediaType.APPLICATION_JSON_VALUE)
-public ResponseEntity<Users> findUserByUsername(@PathVariable String username) {
+    public ResponseEntity<Users> findUserByUsername(@PathVariable String username) {
     Users user = usersService.findUserbyUsername(username);
     if (user == null) {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
@@ -51,10 +54,21 @@ public ResponseEntity<Users> findUserByUsername(@PathVariable String username) {
         return new ResponseEntity<>(newUser,HttpStatus.CREATED);
     }
 
-    @PutMapping("/update")
-    public ResponseEntity<Users> updateUser(@RequestBody Users users){
-        Users updateUser = usersService.updateUsers(users);
-        return new ResponseEntity<>(updateUser,HttpStatus.OK);
+    @PutMapping("/update/{username}")
+    public ResponseEntity<Users> updateUser(@PathVariable("username") String username, @RequestBody Users user){
+        Users existingUser = usersService.findUserbyUsername(username);
+        if(existingUser != null){
+            existingUser.setFirst_name(user.getFirst_name());
+            existingUser.setLast_name(user.getLast_name());
+            existingUser.setPassword(user.getPassword());
+
+            Users updatedUser = usersService.updateUsers(existingUser);
+
+            return new ResponseEntity<>(updatedUser, HttpStatus.OK);
+        } else{
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+            
     }
 
     @DeleteMapping("/delete/{username}")
