@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.backend.model.Users;
@@ -34,11 +37,15 @@ public class UsersResource {
         return new ResponseEntity<>(users,HttpStatus.OK);
     }
 
-    @GetMapping("/find/{username}")
-    public ResponseEntity<Users> getUserbyUsername(@PathVariable("username") String username){
-        Users user = usersService.findUserbyUsername(username);
-        return new ResponseEntity<>(user,HttpStatus.OK);
+    @GetMapping(value = "/find/{username}", produces = MediaType.APPLICATION_JSON_VALUE)
+public ResponseEntity<Users> findUserByUsername(@PathVariable String username) {
+    Users user = usersService.findUserbyUsername(username);
+    if (user == null) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
     }
+    return ResponseEntity.ok(user); 
+}
+
 
     @PostMapping("/add")
     public ResponseEntity<Users> addUser(@RequestBody Users users){
@@ -53,9 +60,18 @@ public class UsersResource {
     }
 
     @DeleteMapping("/delete/{username}")
-    public ResponseEntity<?> deleteUser(@PathVariable("username") String username){
-        usersService.deletUsers(username);
-        return new ResponseEntity<>(HttpStatus.OK);
+public ResponseEntity<?> deleteUser(@PathVariable("username") String username) {
+    try {
+        boolean isDeleted = usersService.deletUsers(username); // Assuming the method returns a boolean
+        if (isDeleted) {
+            return new ResponseEntity<>(HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND); // If user does not exist
+        }
+    } catch (Exception e) {
+        return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR); // For other errors
     }
+}
+
 
 }
