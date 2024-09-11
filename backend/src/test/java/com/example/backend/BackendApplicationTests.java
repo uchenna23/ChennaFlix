@@ -41,7 +41,7 @@ public class BackendApplicationTests {
 
     @Test
     public void testGetUser() throws Exception {
-		String username = "chenna23";
+		String username = "uchenna23";
 		Users mockUser = new Users("Test","Test", "Test","Test");
 		given(usersService.findUserbyUsername(username)).willReturn(mockUser);
 
@@ -59,7 +59,28 @@ public class BackendApplicationTests {
 
     @Test
     public void testDeleteUser() throws Exception {
-        mockMvc.perform(delete("/users/delete/test"))
+        String username = "uchenna23";
+        mockMvc.perform(delete("/users/delete/{username}", username))
                 .andExpect(status().isOk());
     }
+
+	@Test
+public void testUpdateUser() throws Exception {
+    String username = "uchenna23";
+    Users user = new Users();
+    user.setUsername("updatedUsername");
+    user.setPassword("updatedPassword");
+    
+    // Convert the user object to JSON
+    ObjectMapper objectMapper = new ObjectMapper();
+    String userJson = objectMapper.writeValueAsString(user);
+
+    // Perform the PUT request to the update endpoint
+    mockMvc.perform(put("/users/update/{username}", username)
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(userJson))
+            .andExpect(status().isOk()) // Expect HTTP 200 OK
+            .andExpect(jsonPath("$.username").value("updatedUsername")) // Validate the username in the response
+            .andExpect(jsonPath("$.password").value("updatedEmail@example.com")); // Validate the email in the response
+}
 }

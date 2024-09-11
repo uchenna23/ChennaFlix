@@ -3,13 +3,18 @@ package com.example.backend.service;
 import com.example.backend.model.Users;
 import com.example.backend.repo.UsersRepo;
 
+import jakarta.persistence.EntityNotFoundException;
+
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.*;;
 
 @Service
 public class UsersService {
+
+    @Autowired
     private final UsersRepo usersRepo;
 
     
@@ -31,8 +36,8 @@ public class UsersService {
         return usersRepo.findUserByUsername(username);
     }
 
-    public Users updateUsers(Users users){
-        return usersRepo.save(users);
+    public Users updateUsers(Users user){
+       return usersRepo.save(user);
     }
 
     public boolean deletUsers(String username){
