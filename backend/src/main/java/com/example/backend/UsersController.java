@@ -22,12 +22,12 @@ import com.example.backend.service.UsersService;
 
 @RestController
 @RequestMapping("/users")
-public class UsersResource {
+public class UsersController {
     
     @Autowired
     private final UsersService usersService;
 
-    public UsersResource(UsersService usersService){
+    public UsersController(UsersService usersService){
         this.usersService = usersService;
     }
 
