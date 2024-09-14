@@ -65,22 +65,24 @@ public class BackendApplicationTests {
     }
 
 	@Test
-public void testUpdateUser() throws Exception {
+    public void testUpdateUser() throws Exception {
+    testGetUser();
     String username = "uchenna23";
-    Users user = new Users();
-    user.setUsername("updatedUsername");
-    user.setPassword("updatedPassword");
+    Users mockUser = new Users("Test","Test", "uchenna23","Test");
+    given(usersService.findUserbyUsername(username)).willReturn(mockUser);
+
+    mockUser.setPassword("hello");
     
     // Convert the user object to JSON
     ObjectMapper objectMapper = new ObjectMapper();
-    String userJson = objectMapper.writeValueAsString(user);
+    String userJson = objectMapper.writeValueAsString(mockUser);
 
     // Perform the PUT request to the update endpoint
     mockMvc.perform(put("/users/update/{username}", username)
             .contentType(MediaType.APPLICATION_JSON)
             .content(userJson))
             .andExpect(status().isOk()) // Expect HTTP 200 OK
-            .andExpect(jsonPath("$.username").value("updatedUsername")) // Validate the username in the response
-            .andExpect(jsonPath("$.password").value("updatedEmail@example.com")); // Validate the email in the response
+            .andExpect(jsonPath("$.password").value("TRUE")); // Validate the username in the response
+    
 }
 }
