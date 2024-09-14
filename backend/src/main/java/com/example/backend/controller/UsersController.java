@@ -74,14 +74,14 @@ public class UsersController {
     @DeleteMapping("/delete/{username}")
 public ResponseEntity<?> deleteUser(@PathVariable("username") String username) {
     try {
-        boolean isDeleted = usersService.deletUsers(username); // Assuming the method returns a boolean
+        boolean isDeleted = usersService.deletUsers(username); 
         if (isDeleted) {
             return new ResponseEntity<>(HttpStatus.OK);
         } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND); // If user does not exist
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND); 
         }
     } catch (Exception e) {
-        return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR); // For other errors
+        return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }
 
