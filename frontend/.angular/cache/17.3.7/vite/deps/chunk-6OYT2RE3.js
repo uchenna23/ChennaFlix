@@ -1,13 +1,15 @@
 import {
+  Title
+} from "./chunk-BX3NMO3Y.js";
+import {
   DOCUMENT,
   HashLocationStrategy,
   LOCATION_INITIALIZED,
   Location,
   LocationStrategy,
   PathLocationStrategy,
-  Title,
   ViewportScroller
-} from "./chunk-PENOJ73W.js";
+} from "./chunk-ADLUMOFU.js";
 import {
   APP_BOOTSTRAP_LISTENER,
   APP_INITIALIZER,
@@ -111,9 +113,9 @@ import {
   ɵɵloadQuery,
   ɵɵqueryRefresh,
   ɵɵsanitizeUrlOrResourceUrl
-} from "./chunk-G2DDJXAI.js";
+} from "./chunk-UDWM4FL5.js";
 
-// node_modules/@angular/router/fesm2022/router.mjs
+// ../node_modules/@angular/router/fesm2022/router.mjs
 var PRIMARY_OUTLET = "primary";
 var RouteTitleKey = Symbol("RouteTitle");
 var ParamsAsMap = class {
@@ -5611,4 +5613,4 @@ export {
    * License: MIT
    *)
 */
-//# sourceMappingURL=chunk-72GMM2KM.js.map
+//# sourceMappingURL=chunk-6OYT2RE3.js.map

@@ -1,11 +1,19 @@
 import {
+  Tooltip,
+  TooltipModule
+} from "./chunk-6SDXTC32.js";
+import {
+  RouterLink,
+  RouterLinkActive,
+  RouterModule
+} from "./chunk-6OYT2RE3.js";
+import "./chunk-BX3NMO3Y.js";
+import {
   BaseIcon,
   DomHandler,
   Ripple,
-  RippleModule,
-  Tooltip,
-  TooltipModule
-} from "./chunk-B4T7AV74.js";
+  RippleModule
+} from "./chunk-MMR27VKL.js";
 import {
   ObjectUtils,
   PrimeNGConfig,
@@ -13,12 +21,7 @@ import {
   SharedModule,
   UniqueComponentId,
   zindexutils
-} from "./chunk-7PYGHAY7.js";
-import {
-  RouterLink,
-  RouterLinkActive,
-  RouterModule
-} from "./chunk-72GMM2KM.js";
+} from "./chunk-7UMJQSPB.js";
 import {
   CommonModule,
   DOCUMENT,
@@ -28,7 +31,7 @@ import {
   NgStyle,
   NgTemplateOutlet,
   isPlatformBrowser
-} from "./chunk-PENOJ73W.js";
+} from "./chunk-ADLUMOFU.js";
 import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
@@ -101,9 +104,9 @@ import {
   ɵɵtextInterpolate,
   ɵɵtextInterpolate1,
   ɵɵviewQuery
-} from "./chunk-G2DDJXAI.js";
+} from "./chunk-UDWM4FL5.js";
 
-// node_modules/primeng/fesm2022/primeng-icons-angledown.mjs
+// ../node_modules/primeng/fesm2022/primeng-icons-angledown.mjs
 var AngleDownIcon = class _AngleDownIcon extends BaseIcon {
   static ɵfac = /* @__PURE__ */ (() => {
     let ɵAngleDownIcon_BaseFactory;
@@ -153,7 +156,7 @@ var AngleDownIcon = class _AngleDownIcon extends BaseIcon {
   }], null, null);
 })();
 
-// node_modules/primeng/fesm2022/primeng-icons-angleright.mjs
+// ../node_modules/primeng/fesm2022/primeng-icons-angleright.mjs
 var AngleRightIcon = class _AngleRightIcon extends BaseIcon {
   static ɵfac = /* @__PURE__ */ (() => {
     let ɵAngleRightIcon_BaseFactory;
@@ -203,7 +206,7 @@ var AngleRightIcon = class _AngleRightIcon extends BaseIcon {
   }], null, null);
 })();
 
-// node_modules/primeng/fesm2022/primeng-icons-bars.mjs
+// ../node_modules/primeng/fesm2022/primeng-icons-bars.mjs
 var BarsIcon = class _BarsIcon extends BaseIcon {
   static ɵfac = /* @__PURE__ */ (() => {
     let ɵBarsIcon_BaseFactory;
@@ -255,7 +258,7 @@ var BarsIcon = class _BarsIcon extends BaseIcon {
   }], null, null);
 })();
 
-// node_modules/primeng/fesm2022/primeng-menubar.mjs
+// ../node_modules/primeng/fesm2022/primeng-menubar.mjs
 var _c0 = ["menubar"];
 var _c1 = (a0, a1) => ({
   "p-submenu-list": a0,
