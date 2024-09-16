@@ -1,6 +1,6 @@
 import {
   DomHandler
-} from "./chunk-6F477HUI.js";
+} from "./chunk-OHZTVY3L.js";
 import {
   PrimeNGConfig
 } from "./chunk-7JDOJEXD.js";
@@ -193,4 +193,4 @@ export {
   Ripple,
   RippleModule
 };
-//# sourceMappingURL=chunk-PFQRAGIP.js.map
+//# sourceMappingURL=chunk-QTJUNME6.js.map

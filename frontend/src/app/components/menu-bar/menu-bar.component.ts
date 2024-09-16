@@ -2,12 +2,14 @@ import { Component } from '@angular/core';
 import { MenuItem } from 'primeng/api';
 import { TabMenuModule } from 'primeng/tabmenu';
 import { MenubarModule } from 'primeng/menubar';
+import { AvatarModule } from 'primeng/avatar';
+import { AvatarGroupModule } from 'primeng/avatargroup';
 
 
 @Component({
   selector: 'full-stack-resume-menu-bar',
   standalone: true,
-  imports: [TabMenuModule, MenubarModule, ],
+  imports: [TabMenuModule, MenubarModule, AvatarModule, AvatarGroupModule ],
   templateUrl: './menu-bar.component.html',
   styleUrl: './menu-bar.component.scss'
 })
