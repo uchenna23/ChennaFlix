@@ -18,43 +18,25 @@ export class MenuBarComponent {
     ngOnInit() {
         this.items = [
             {
-                label: 'Login',
+                label: 'Home',
                 icon: 'pi pi-home',
-                routerLink: 'login'
+                routerLink: 'home'
             },
             {
-                label: 'About Me',
-                icon: 'pi pi-id-card',
-                routerLink: 'aboutme'
+                label: 'TV Shows',
+                icon: 'pi pi-video',
+                routerLink: 'tvshows'
             },
             {
-                label: 'Employment History',
-                icon: 'pi pi-pencil',
-                routerLink: 'employment'
+                label: 'Movies',
+                icon: 'pi pi-star',
+                routerLink: 'movies'
             },
             {
-                label: 'Projects',
-                icon: 'pi pi-search',
-                routerLink: 'projects',
-                items: [
-                    {
-                        label: 'DBM Dealer Web Application',
-                        icon: 'pi pi-server',
-                        shortcut: '⌘+S'
-                    },
-                    {
-                        label: 'TVS Web Application',
-                        icon: 'pi pi-server',
-                        shortcut: '⌘+B'
-                    },
-                ]
-            },
-            {
-                label: 'Contact',
-                icon: 'pi pi-address-book',
-                routerLink: 'contact'
-            },
-            
+                label: 'Settings',
+                icon: 'pi pi-cog',
+                routerLink: 'settings',
+            }
         ]
     }
 
