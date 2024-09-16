@@ -1,7 +1,7 @@
 import {
   ConnectedOverlayScrollHandler,
   DomHandler
-} from "./chunk-6F477HUI.js";
+} from "./chunk-OHZTVY3L.js";
 import {
   PrimeNGConfig,
   UniqueComponentId,
@@ -868,4 +868,4 @@ export {
   Tooltip,
   TooltipModule
 };
-//# sourceMappingURL=chunk-7W2FR6X4.js.map
+//# sourceMappingURL=chunk-L5LABHY7.js.map

@@ -8,5 +8,5 @@ export const routes: Routes = [
     {path: 'tvshows', component: TvShowsPageComponent},
     {path: 'settings', component: SettingsPageComponent},
     {path: 'home', component: HomePageComponent},
-    {path: '', redirectTo: '/login', pathMatch: 'full' }
+    {path: '', redirectTo: '/home', pathMatch: 'full' }
 ];
