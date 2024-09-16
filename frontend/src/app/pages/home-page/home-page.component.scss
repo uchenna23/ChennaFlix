@@ -1,0 +1,37 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40rem;
+  }
+  
+  .username {
+    display: flex;
+    justify-content: left;
+    // padding-top: 2rem;
+    padding-bottom: 2rem;
+  }
+  .firstName {
+    display: flex;
+    justify-content: left;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+  }
+  .lastName {
+    display: flex;
+    justify-content: left;
+    padding-bottom: 2rem;
+  }
+  
+  .password {
+    display: flex;
+    justify-content: left;
+  }
+  
+  .login {
+    display: flex;
+    justify-content: right;
+  }
+    
+  
+    

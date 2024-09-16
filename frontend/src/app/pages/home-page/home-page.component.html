@@ -1,0 +1,59 @@
+<div class="container">
+    <p-card header="Welcome to ChennaFlix!" subheader="Media at your fingertips." [style]="{ width: '400px' }">
+        <ng-template pTemplate="footer">
+            <div class="flex gap-3 mt-1">
+                <p-button (onClick)="showLoginDialog()" label=" Login" />
+                <p-dialog header="Welcome back!" [modal]="true" [(visible)]="loginVisible" [style]="{ width: '20rem' }">
+                    <div class="username">
+                        <p-floatLabel>
+                            <input pInputText id="username" />
+                            <label for="username">Username</label>
+                        </p-floatLabel>
+                    </div>
+                    <div class="password">
+                        <p-floatLabel>
+                            <input pInputText id="password"/>
+                            <label for="password">Password</label>
+                        </p-floatLabel>
+                    </div>
+                    <div class="login">
+                        <p-button label="Login" (onClick)="loginVisible = false" />
+                    </div>
+                </p-dialog>
+                <body>
+                    OR
+                </body>
+                <p-button (onClick)="showCreateAccountDialog()" label="Create Account" class="w-full" styleClass="w-full" />
+                <p-dialog header="Create a new account!" [modal]="true" [(visible)]="createVisible" [style]="{ width: '25rem' }">
+                    <div class="firstName">
+                        <p-floatLabel>
+                            <input pInputText id="firstName"/>
+                            <label for="firstName">First Name</label>
+                        </p-floatLabel>
+                    </div>
+                    <div class="lastName">
+                        <p-floatLabel>
+                            <input pInputText id="lastName"/>
+                            <label for="lastName">Last Name</label>
+                        </p-floatLabel>
+                    </div>
+                    <div class="username">
+                        <p-floatLabel>
+                            <input pInputText id="username"/>
+                            <label for="username">Username</label>
+                        </p-floatLabel>
+                    </div>
+                    <div class="password">
+                        <p-floatLabel>
+                            <input pInputText id="password"/>
+                            <label for="password">Password</label>
+                        </p-floatLabel>
+                    </div>
+                    <div class="login">
+                        <p-button label="Create Account" (onClick)="createVisible = false" />
+                    </div>
+                </p-dialog>
+            </div>
+        </ng-template>
+    </p-card>
+</div>
