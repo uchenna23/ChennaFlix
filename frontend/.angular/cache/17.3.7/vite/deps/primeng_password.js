@@ -4,7 +4,7 @@ import {
 } from "./chunk-DQMWXLJZ.js";
 import {
   TimesIcon
-} from "./chunk-GWZVI44O.js";
+} from "./chunk-I5UUSKK7.js";
 import {
   animate,
   style,
@@ -14,21 +14,12 @@ import {
 import {
   AutoFocus,
   AutoFocusModule
-} from "./chunk-Z5ILJTTG.js";
+} from "./chunk-5KQJ2LWH.js";
 import {
   BaseIcon,
   ConnectedOverlayScrollHandler,
   DomHandler
-} from "./chunk-OHZTVY3L.js";
-import {
-  OverlayService,
-  PrimeNGConfig,
-  PrimeTemplate,
-  SharedModule,
-  TranslationKeys,
-  UniqueComponentId,
-  zindexutils
-} from "./chunk-7JDOJEXD.js";
+} from "./chunk-6F477HUI.js";
 import {
   CommonModule,
   DOCUMENT,
@@ -38,6 +29,15 @@ import {
   NgTemplateOutlet,
   isPlatformBrowser
 } from "./chunk-MERCCBK5.js";
+import {
+  OverlayService,
+  PrimeNGConfig,
+  PrimeTemplate,
+  SharedModule,
+  TranslationKeys,
+  UniqueComponentId,
+  zindexutils
+} from "./chunk-7JDOJEXD.js";
 import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,

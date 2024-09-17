@@ -3,6 +3,8 @@ import { RouterOutlet } from '@angular/router';
 import { MenuBarComponent } from "./components/menu-bar/menu-bar.component";
 import {PrimeNGConfig } from 'primeng/api';
 import { HomePageComponent } from './pages/home-page/home-page.component';
+
+
 @Component({
   selector: 'app-root',
   standalone: true,

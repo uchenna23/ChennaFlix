@@ -22,7 +22,7 @@ public class UsersService {
         this.usersRepo = usersRepo;
 }
 
-    public Users addUsers(Users users){
+    public Users createUsers(Users users){
         return usersRepo.save(users);
 
     }

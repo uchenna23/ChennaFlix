@@ -8,6 +8,15 @@ import { AvatarGroupModule } from 'primeng/avatargroup';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
+import { UserService } from '../../services/user.service';
+
+
+interface User{
+  username: string;
+  password: string;
+  first_name: string;
+  last_name: string;
+}
 
 @Component({
   selector: 'full-stack-resume-home-page',
@@ -18,17 +27,42 @@ import { ToastModule } from 'primeng/toast';
   styleUrl: './home-page.component.scss'
 })
 export class HomePageComponent implements OnInit {
+  successMessage: string = '';
+  errorMessage: string = '';
 
-  constructor(private messageService: MessageService){}
+  constructor(private messageService: MessageService, private userService: UserService){}
 
   formGroup!: FormGroup;
-  
+
+  // Create Account User Inputs
+  newUser: User = {
+    username:  '',
+    password: '',
+    first_name: '',
+    last_name: '',
+  }
+
 
   loginVisible: boolean = false;
 
   createVisible: boolean = false;
   
   value: string | undefined;
+
+  createUser() {
+    this.userService.createUser(this.newUser)
+      .subscribe(
+        data => {
+          this.successMessage = 'User created successfully!';
+          this.errorMessage = '';
+        },
+        error => {
+          this.errorMessage = 'Failed to create user';
+          this.successMessage = '';
+        }
+      );
+  }
+
 
   public showLoginDialog(){
     this.loginVisible = true;
@@ -52,7 +86,8 @@ export class HomePageComponent implements OnInit {
   }
 
   accountCreated(){
-
+    this.messageService.add({ severity: 'success', summary: 'Success', 
+      detail: 'Account Created!'});
   }
 
 }
