@@ -21,4 +21,19 @@ export class AppComponent {
     }
     
   title = 'Uchenna Nwagbara Portfolio';
+
+  componentDidMount(){
+    console.log('testing')
+    fetch('http://localhost:8080/users/create',
+    {
+      method: "GET",
+      headers: {
+        "Accept": "application/json"
+      }
+    }).then(response =>{
+      response.json().then(json=> {
+        console.log("Response :",json);
+      });
+    });
+  }
 }

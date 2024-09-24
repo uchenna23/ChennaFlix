@@ -3,7 +3,7 @@ import {
   NgClass,
   NgIf,
   NgStyle
-} from "./chunk-MERCCBK5.js";
+} from "./chunk-B6CS3NWU.js";
 import {
   ChangeDetectionStrategy,
   Component,
@@ -36,9 +36,9 @@ import {
   ɵɵtemplateRefExtractor,
   ɵɵtext,
   ɵɵtextInterpolate
-} from "./chunk-F7QFJHO6.js";
+} from "./chunk-P5Y2QPUT.js";
 
-// ../../node_modules/primeng/fesm2022/primeng-avatar.mjs
+// node_modules/primeng/fesm2022/primeng-avatar.mjs
 var _c0 = ["*"];
 function Avatar_span_2_Template(rf, ctx) {
   if (rf & 1) {

@@ -4,6 +4,13 @@
   "configurations": [
     {
       "type": "java",
+      "name": "corsConfig",
+      "request": "launch",
+      "mainClass": "corsConfig.corsConfig",
+      "projectName": "backend"
+    },
+    {
+      "type": "java",
       "name": "BackendApplication",
       "request": "launch",
       "mainClass": "com.example.backend.BackendApplication",

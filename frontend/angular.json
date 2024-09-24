@@ -65,7 +65,8 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "Full-Stack-Resume:build:production"
+              "buildTarget": "Full-Stack-Resume:build:dev-server",
+              "proxyConfig": "src/proxy.conf.json"
             },
             "development": {
               "buildTarget": "Full-Stack-Resume:build:development"

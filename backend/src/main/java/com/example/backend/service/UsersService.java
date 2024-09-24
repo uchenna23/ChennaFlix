@@ -3,7 +3,6 @@ package com.example.backend.service;
 import com.example.backend.model.Users;
 import com.example.backend.repo.UsersRepo;
 
-import jakarta.persistence.EntityNotFoundException;
 
 import java.util.List;
 import java.util.Optional;
