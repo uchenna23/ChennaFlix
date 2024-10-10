@@ -52,7 +52,7 @@
                         <input [(ngModel)]="newUser.last_name" type="text" pInputText formControlName="text" />
                     </div>
                     <div class="loginButton">
-                        <p-button label="Create Account" (onClick)="createVisible = false" />
+                        <p-button label="Create Account" (onClick)="createUser()" (onClick)="createVisible = false" />
                     </div>
                 </form>
                 </p-dialog>

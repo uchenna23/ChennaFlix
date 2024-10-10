@@ -51,16 +51,20 @@ export class HomePageComponent implements OnInit {
 
   createUser() {
     this.userService.createUser(this.newUser)
-      .subscribe(
-        data => {
-          this.successMessage = 'User created successfully!';
-          this.errorMessage = '';
-        },
-        error => {
-          this.errorMessage = 'Failed to create user';
-          this.successMessage = '';
-        }
-      );
+    .subscribe(
+      (data) => {
+        // This function runs when the Observable emits a value (the HTTP response)
+        console.log('Data:', data);
+      },
+      (error) => {
+        // This function runs if an error occurs during the observable execution
+        console.error('Error:', error);
+      },
+      () => {
+        // This function runs when the Observable completes
+        console.log('Observable completed');
+      }
+    );
   }
 
 
