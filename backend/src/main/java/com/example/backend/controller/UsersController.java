@@ -48,7 +48,7 @@ public class UsersController {
 
     @PostMapping("/create")
     public ResponseEntity<?> createUser(@RequestBody Users users){
-        Users existingUser = usersService.findUserbyUsername(users.getUsername());
+        Users existingUser = usersService.findUserbyUsername(users.getUsername().toLowerCase());
         if(existingUser != null){
             return new ResponseEntity<>("Username already exists", HttpStatus.CONFLICT );
         }

@@ -9,6 +9,7 @@ import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, FormBuilder, 
 import { MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
 import { UserService } from '../../services/user.service';
+import { HttpResponse } from '@angular/common/http';
 
 
 interface User{
@@ -109,7 +110,11 @@ resetForm() {
 
   missingInfo(){
     this.messageService.add({ severity: 'error', summary: 'Error', 
-      detail: 'Some field(s) missing.', life: 3000});
+      detail: 'Some field(s) missing, or Password is not at least 6 characters.', life: 3000});
+  }
+  passwordLength(){
+    this.messageService.add({ severity: 'error', summary: 'Error', 
+      detail: 'Password must be at least 6 characters long.', life: 3000});
   }
 
   alreadyExists(){
