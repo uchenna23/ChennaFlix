@@ -1,61 +1,64 @@
 <div class="container">
-    <p-toast/>
     <p-card header=" We are ChennaFlix!" subheader="Media at your fingertips." [style]="{ width: '400px' }">
         <ng-template pTemplate="footer">
             <div class="loginCard">
                 <p-button (onClick)="showLoginDialog()" label=" Login" />
-                <p-dialog header="Please Login." [modal]="true" [(visible)]="loginVisible" [style]="{ width: '20rem' }">
-                    <div class="usernameLabel" [formGroup]="formGroup">
+                <p-toast></p-toast>
+                <p-dialog header="Please Login." [modal]="true" [(visible)]="loginVisible" [style]="{ width: '20rem' }" (onHide)="resetForm()">
+                    <form [formGroup]="formGroup">
+                      <div class="usernameLabel">
                         <label for="username">Username</label>
-                    </div>
-                    <div class="usernameInput" [formGroup]="formGroup">
-                        <input type="text" pInputText formControlName="text" />
-                    </div>
-                    <div class="passwordLabel" [formGroup]="formGroup">
+                      </div>
+                      <div class="usernameInput">
+                        <input type="text" id="username" pInputText formControlName="username" />
+                      </div> 
+                      <div class="passwordLabel">
                         <label for="password">Password</label>
-                    </div>
-                    <div class="passwordInput" [formGroup]="formGroup">
-                        <input type="text" pInputText formControlName="text" />
-                    </div>
-                    <div class="loginButton">
-                        <p-button type="button" (onClick)="loginVisible = false" label="Login" />
-                    </div>
-                </p-dialog>
+                      </div>
+                      <div class="passwordInput">
+                        <input type="password" id="password" pInputText formControlName="password" />
+                      </div>      
+                      <div class="loginButton">
+                        <p-button type="button" (onClick)="getUsers()" label="Login"></p-button>
+                      </div>
+                    </form>
+                  </p-dialog>
                 <body>
                     OR
                 </body>
                 <p-button (onClick)="showCreateAccountDialog()" label="Create Account" class="w-full" styleClass="w-full" />
-                <p-dialog header="Create a new account!" [modal]="true" [(visible)]="createVisible" [style]="{ width: '25rem' }">
-                <form (ngSubmit)="createUser()">
-                    <div class="usernameLabel" [formGroup]="formGroup">
+                <p-toast></p-toast>
+                <p-dialog header="Create a new account!" [modal]="true" [(visible)]="createVisible" [style]="{ width: '25rem'}" (onHide)="resetForm()">
+                    <form [formGroup]="formGroup" (ngSubmit)="createUser()">
+                      <div class="usernameLabel">
                         <label for="username">Username</label>
-                    </div>
-                    <div class="usernameInput" [formGroup]="formGroup">
-                        <input [(ngModel)]="newUser.username" type="text" pInputText formControlName="text" />
-                    </div>
-                    <div class="passwordLabel" [formGroup]="formGroup">
+                      </div>
+                      <div class="usernameInput">
+                        <input type="text" id="username" pInputText formControlName="username" />
+                      </div>
+                      <div class="passwordLabel">
                         <label for="password">Password</label>
-                    </div>
-                    <div class="passwordInput" [formGroup]="formGroup">
-                        <input [(ngModel)]="newUser.password" type="text" pInputText formControlName="text" />
-                    </div>
-                    <div class="firstNameLabel" [formGroup]="formGroup">
+                      </div>
+                      <div class="passwordInput">
+                        <input type="password" id="password" pInputText formControlName="password" />
+                      </div>
+                      <div class="firstNameLabel">
                         <label for="firstName">First Name</label>
-                    </div>
-                    <div class="firstNameInput" [formGroup]="formGroup">
-                        <input [(ngModel)]="newUser.first_name" type="text" pInputText formControlName="text" />
-                    </div>
-                    <div class="lastNameLabel" [formGroup]="formGroup">
+                      </div>
+                      <div class="firstNameInput">
+                        <input type="text" id="firstName" pInputText formControlName="first_name" />
+                      </div>
+                      <div class="lastNameLabel">
                         <label for="lastName">Last Name</label>
-                    </div>
-                    <div class="lastnameInput" [formGroup]="formGroup">
-                        <input [(ngModel)]="newUser.last_name" type="text" pInputText formControlName="text" />
-                    </div>
-                    <div class="loginButton">
-                        <p-button label="Create Account" (onClick)="createUser()" (onClick)="createVisible = false" />
-                    </div>
-                </form>
-                </p-dialog>
+                      </div>
+                      <div class="lastnameInput">
+                        <input type="text" id="lastName" pInputText formControlName="last_name" />
+                      </div>
+                      <div class="loginButton">
+                        <p-button type="submit" label="Create Account"></p-button>
+                      </div>
+                    </form>
+                </p-dialog>                
             </div>
         </ng-template>
     </p-card>
