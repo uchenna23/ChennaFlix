@@ -3,6 +3,7 @@ package com.example.backend.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.security.SecurityProperties.User;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -20,6 +21,7 @@ import com.example.backend.service.UsersService;
 
 
 @RestController
+@CrossOrigin(origins = "*")
 public class UsersController {
     
     @Autowired
@@ -35,17 +37,21 @@ public class UsersController {
         return new ResponseEntity<>(users,HttpStatus.OK);
     }
 
-    @GetMapping(value = "/find/{username}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Users> findUserByUsername(@PathVariable String username) {
-    Users user = usersService.findUserbyUsername(username);
-    if (user == null) {
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+    @GetMapping(value = "/login/{username}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Users> findUserByUsername(@PathVariable String username){
+        Users user = usersService.findUserbyUsername(username.toLowerCase());
+        if (user == null){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+        return ResponseEntity.ok(user);
     }
-    return ResponseEntity.ok(user); 
-}
-    
-@PostMapping("/create")
-    public ResponseEntity<Users> createUser(@RequestBody Users users){
+
+    @PostMapping("/create")
+    public ResponseEntity<?> createUser(@RequestBody Users users){
+        Users existingUser = usersService.findUserbyUsername(users.getUsername());
+        if(existingUser != null){
+            return new ResponseEntity<>("Username already exists", HttpStatus.CONFLICT );
+        }
         Users newUser = usersService.createUsers(users);
         return new ResponseEntity<>(newUser,HttpStatus.CREATED);
     }
@@ -68,18 +74,18 @@ public class UsersController {
     }
 
     @DeleteMapping("/delete/{username}")
-public ResponseEntity<?> deleteUser(@PathVariable("username") String username) {
-    try {
-        boolean isDeleted = usersService.deletUsers(username); 
-        if (isDeleted) {
-            return new ResponseEntity<>(HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND); 
+    public ResponseEntity<?> deleteUser(@PathVariable("username") String username) {
+        try {
+            boolean isDeleted = usersService.deletUsers(username); 
+            if (isDeleted) {
+                return new ResponseEntity<>(HttpStatus.OK);
+            } else{
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND); 
+            }
+        } catch(Exception e){
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
-    } catch (Exception e) {
-        return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
     }
-}
 
 
 }

@@ -5,7 +5,7 @@ import { DialogModule } from 'primeng/dialog';
 import { FloatLabelModule } from 'primeng/floatlabel';
 import { AvatarModule } from 'primeng/avatar';
 import { AvatarGroupModule } from 'primeng/avatargroup';
-import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, FormBuilder, Validators  } from '@angular/forms';
 import { MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
 import { UserService } from '../../services/user.service';
@@ -27,14 +27,7 @@ interface User{
   styleUrl: './home-page.component.scss'
 })
 export class HomePageComponent implements OnInit {
-  successMessage: string = '';
-  errorMessage: string = '';
-
-  constructor(private messageService: MessageService, private userService: UserService){}
-
-  formGroup!: FormGroup;
-
-  // Create Account User Inputs
+  formGroup!: FormGroup;  
   newUser: User = {
     username:  '',
     password: '',
@@ -48,25 +41,51 @@ export class HomePageComponent implements OnInit {
   createVisible: boolean = false;
   
   value: string | undefined;
+  
+  successMessage: string = '';
+  errorMessage: string = '';
 
-  createUser() {
-    this.userService.createUser(this.newUser)
+  constructor(private messageService: MessageService, private userService: UserService, private fb: FormBuilder){}
+
+  ngOnInit(): void{
+    this.formGroup = this.fb.group({
+      username: ['', Validators.required],
+      password: ['', [Validators.required, Validators.minLength(6)]],
+      first_name: ['', Validators.required],
+      last_name: ['', Validators.required]
+    });
+  }
+  
+  createUser(){
+    if(!this.formGroup.valid){
+      this.missingInfo();
+      this.showCreateAccountDialog();
+      return;
+    }
+    this.userService.createUser(this.formGroup.value)
     .subscribe(
       (data) => {
-        // This function runs when the Observable emits a value (the HTTP response)
-        console.log('Data:', data);
+        console.log('Data', data);
+        this.accountCreated();
       },
       (error) => {
-        // This function runs if an error occurs during the observable execution
         console.error('Error:', error);
+        this.alreadyExists();
       },
       () => {
-        // This function runs when the Observable completes
+        this.createVisible = false;
         console.log('Observable completed');
       }
     );
   }
 
+  getUsers(){
+    this.loginVisible = false;
+  }
+
+resetForm() {
+  this.formGroup.reset();
+}
 
   public showLoginDialog(){
     this.loginVisible = true;
@@ -74,12 +93,6 @@ export class HomePageComponent implements OnInit {
 
   public showCreateAccountDialog(){
     this.createVisible = true;
-  }
-  
-  ngOnInit(): void {
-    this.formGroup = new FormGroup({
-      text: new FormControl()
-  });
   }
 
   //Toast Messages for Login and creating account
@@ -93,5 +106,17 @@ export class HomePageComponent implements OnInit {
     this.messageService.add({ severity: 'success', summary: 'Success', 
       detail: 'Account Created!'});
   }
+
+  missingInfo(){
+    this.messageService.add({ severity: 'error', summary: 'Error', 
+      detail: 'Some field(s) missing.', life: 3000});
+  }
+
+  alreadyExists(){
+    this.messageService.add({ severity: 'error', summary: 'Error', 
+      detail: 'Username already exists', life: 3000});
+  }
+
+ 
 
 }

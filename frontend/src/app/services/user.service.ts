@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 interface User{
@@ -22,4 +22,13 @@ export class UserService {
     const headers = new HttpHeaders({'Content-Type':'application/json'});
     return this.http.post<User>(`${this.apiUrl}/create`, user, { headers});
   }
+
+  getAllUsers(user: User): Observable<User[]> {
+    const headers = new HttpHeaders({'Content-Type': 'application/json'});
+    const params = new HttpParams()
+      .set('username', user.username)
+      .set('password', user.password);
+    return this.http.get<User[]>(`${this.apiUrl}/all`, { headers, params });
+  }
+  
 }
