@@ -80,14 +80,33 @@ export class HomePageComponent implements OnInit {
     );
   }
 
-  getUsers(){
-    this.loginVisible = false;
+  userLogin(){
+    this.userService.userLogin(this.formGroup.value)
+    .subscribe(
+      (data) => {
+        this.loginSuccess();
+        console.log('Login successful:', data);
+        this.loginVisible = false;
+      },
+      (error) => {
+        if (error.status === 401) {
+          console.error('Login failed: Unauthorized', error);
+          this.loginFail();
+        } else{
+          console.error('Error:', error);
+          this.loginFail();
+        }
+      },
+      () => {
+        console.log('Observable completed');
+      }
+    );
   }
 
-resetForm() {
-  this.formGroup.reset();
-}
-
+  resetForm() {
+    this.formGroup.reset();
+  }
+///Dialog Contorls
   public showLoginDialog(){
     this.loginVisible = true;
   } 
@@ -101,6 +120,10 @@ resetForm() {
   loginSuccess(){
     this.messageService.add({ severity: 'success', summary: 'Welcome Back', 
       detail: 'Happy Watching!'});
+  }
+  loginFail(){
+    this.messageService.add({ severity: 'error', summary: 'Error Logging in.', 
+      detail: 'Wrong Username/Password.'});
   }
 
   accountCreated(){
