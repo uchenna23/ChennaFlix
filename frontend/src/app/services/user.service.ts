@@ -9,6 +9,7 @@ interface User{
   last_name: string;
 }
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -23,12 +24,10 @@ export class UserService {
     return this.http.post<User>(`${this.apiUrl}/create`, user, { headers});
   }
 
-  getAllUsers(user: User): Observable<User[]> {
+  userLogin(user: User): Observable<User> {
     const headers = new HttpHeaders({'Content-Type': 'application/json'});
-    const params = new HttpParams()
-      .set('username', user.username)
-      .set('password', user.password);
-    return this.http.get<User[]>(`${this.apiUrl}/all`, { headers, params });
+    const url = `${this.apiUrl}/login/${user.username}/${user.password}`;
+    return this.http.get<User>(url, {headers});
   }
   
 }

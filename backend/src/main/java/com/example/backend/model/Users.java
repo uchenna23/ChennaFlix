@@ -7,6 +7,8 @@ import jakarta.persistence.*;
 @Table(name = "users", schema = "angular_resume")
 public class Users implements Serializable {
 
+   
+
     @Id
     private String username;
 
@@ -18,6 +20,8 @@ public class Users implements Serializable {
 
     @Column(name = "password")
     private String password;
+
+
 
 
     public Users() {

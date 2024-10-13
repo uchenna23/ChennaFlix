@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.SecurityProperties.User;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -37,20 +38,21 @@ public class UsersController {
         return new ResponseEntity<>(users,HttpStatus.OK);
     }
 
-    @GetMapping(value = "/login/{username}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Users> findUserByUsername(@PathVariable String username){
+    @GetMapping(value = "/login/{username}/{password}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Users> userLogin(@PathVariable String username, @PathVariable String password){
         Users user = usersService.findUserbyUsername(username.toLowerCase());
-        if (user == null){
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-        }
+        if(user == null || !user.getPassword().equals(password)){
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+        }    
         return ResponseEntity.ok(user);
+        
     }
 
     @PostMapping("/create")
     public ResponseEntity<?> createUser(@RequestBody Users users){
         Users existingUser = usersService.findUserbyUsername(users.getUsername().toLowerCase());
         if(existingUser != null){
-            return new ResponseEntity<>("Username already exists", HttpStatus.CONFLICT );
+            return new ResponseEntity<>("Username already exists.", HttpStatus.CONFLICT );
         }
         Users newUser = usersService.createUsers(users);
         return new ResponseEntity<>(newUser,HttpStatus.CREATED);
