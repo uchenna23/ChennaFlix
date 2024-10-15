@@ -20,7 +20,7 @@ export class AppComponent {
         
     }
     
-  title = 'Uchenna Nwagbara Portfolio';
+  title = 'ChennaFlix';
 
   componentDidMount(){
     console.log('testing')

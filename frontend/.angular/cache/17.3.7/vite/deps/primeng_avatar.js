@@ -3,7 +3,7 @@ import {
   NgClass,
   NgIf,
   NgStyle
-} from "./chunk-B6CS3NWU.js";
+} from "./chunk-GWYMHQYR.js";
 import {
   ChangeDetectionStrategy,
   Component,

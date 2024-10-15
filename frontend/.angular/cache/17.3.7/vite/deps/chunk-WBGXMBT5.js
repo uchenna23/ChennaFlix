@@ -1,11 +1,11 @@
 import {
-  DOCUMENT,
-  isPlatformBrowser
-} from "./chunk-B6CS3NWU.js";
-import {
   ObjectUtils,
   PrimeNGConfig
 } from "./chunk-H4OTKQVJ.js";
+import {
+  DOCUMENT,
+  isPlatformBrowser
+} from "./chunk-GWYMHQYR.js";
 import {
   ChangeDetectionStrategy,
   Component,
@@ -986,4 +986,4 @@ export {
   Ripple,
   RippleModule
 };
-//# sourceMappingURL=chunk-MTCBE3B7.js.map
+//# sourceMappingURL=chunk-WBGXMBT5.js.map
