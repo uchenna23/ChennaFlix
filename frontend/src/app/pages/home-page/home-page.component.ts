@@ -5,12 +5,13 @@ import { DialogModule } from 'primeng/dialog';
 import { FloatLabelModule } from 'primeng/floatlabel';
 import { AvatarModule } from 'primeng/avatar';
 import { AvatarGroupModule } from 'primeng/avatargroup';
-import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, FormBuilder, Validators  } from '@angular/forms';
+import { FormGroup, FormsModule, ReactiveFormsModule, FormBuilder, Validators  } from '@angular/forms';
 import { MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
 import { UserService } from '../../services/user.service';
-import { HttpResponse } from '@angular/common/http';
-
+import { UserProfilePageComponent } from '../user-profile-page/user-profile-page.component';
+import { Router } from '@angular/router';
+import { CommonModule } from '@angular/common';
 
 interface User{
   username: string;
@@ -22,7 +23,7 @@ interface User{
 @Component({
   selector: 'full-stack-resume-home-page',
   standalone: true,
-  imports: [ButtonModule, CardModule, DialogModule, FloatLabelModule, AvatarGroupModule, AvatarModule, FormsModule, ReactiveFormsModule, ToastModule],
+  imports: [ButtonModule, CardModule, DialogModule, FloatLabelModule, AvatarGroupModule, AvatarModule, FormsModule, ReactiveFormsModule, ToastModule, CommonModule],
   providers: [MessageService],
   templateUrl: './home-page.component.html',
   styleUrl: './home-page.component.scss'
@@ -40,13 +41,15 @@ export class HomePageComponent implements OnInit {
   loginVisible: boolean = false;
 
   createVisible: boolean = false;
+
+  isCardVisible: boolean = true;
   
   value: string | undefined;
   
   successMessage: string = '';
   errorMessage: string = '';
 
-  constructor(private messageService: MessageService, private userService: UserService, private fb: FormBuilder){}
+  constructor(private messageService: MessageService, private userService: UserService, private fb: FormBuilder, private router: Router){}
 
   ngOnInit(): void{
     this.formGroup = this.fb.group({
@@ -84,9 +87,13 @@ export class HomePageComponent implements OnInit {
     this.userService.userLogin(this.formGroup.value)
     .subscribe(
       (data) => {
-        this.loginSuccess();
         console.log('Login successful:', data);
+        this.loginSuccess();
         this.loginVisible = false;
+        this.isCardVisible = false;
+        setTimeout(() => {
+          this.router.navigate(['profile']);
+        }, 1000);
       },
       (error) => {
         if (error.status === 401) {

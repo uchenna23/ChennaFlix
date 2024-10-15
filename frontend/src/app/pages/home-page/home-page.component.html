@@ -11,8 +11,9 @@
     align-items: center;
   }
 </style>
+<p-toast></p-toast>
 <div class="container">
-    <p-card header="Stream Beyond Limits." subheader="Welcome to ChennaFlix!" [style]="{ width: '400px' }">
+    <p-card *ngIf="isCardVisible" header="Stream Beyond Limits." subheader="Welcome to ChennaFlix!" [style]="{ width: '400px' }">
         <ng-template pTemplate="footer">
             <div class="loginCard">
                 <p-button (onClick)="showLoginDialog()" label=" Login" />
