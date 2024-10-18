@@ -39,6 +39,16 @@ public class UsersController {
         
     }
 
+    @GetMapping(value = "/getUser/{username}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Users> getUser(@PathVariable String username){
+        Users user = usersService.findUserbyUsername(username.toLowerCase());
+        if(user == null){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }else{
+            return ResponseEntity.ok(user);
+        }
+    }
+
     @PostMapping("/create")
     public ResponseEntity<?> createUser(@RequestBody Users users){
         Users existingUser = usersService.findUserbyUsername(users.getUsername().toLowerCase());
