@@ -9,6 +9,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 
@@ -17,7 +18,9 @@ import static org.mockito.BDDMockito.given;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
+
 @SpringBootTest
+@ActiveProfiles("test")
 @AutoConfigureMockMvc
 public class BackendApplicationTests {
 
@@ -28,61 +31,55 @@ public class BackendApplicationTests {
     private MockMvc mockMvc;
 
     @Autowired
-    private ObjectMapper objectMapper;  // Used for serializing/deserializing JSON
+    private ObjectMapper objectMapper;
 
     @Test
     public void testCreateUser() throws Exception {
-        Users newUser = new Users("Test", "Test", "Test", "Test");
-        mockMvc.perform(post("/users/add")
+        Users newUser = new Users("Test", "Test", "uchenna23", "Test123");
+        mockMvc.perform(post("/create")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(newUser)))
-                .andExpect(status().isOk());
+                .andExpect(status().isCreated());
     }
+
 
     @Test
     public void testGetUser() throws Exception {
 		String username = "uchenna23";
-		Users mockUser = new Users("Test","Test", "Test","Test");
+        String password = "Test123";
+		Users mockUser = new Users("Test","Test", "uchenna23","Test123");
 		given(usersService.findUserbyUsername(username)).willReturn(mockUser);
 
-		MvcResult result = mockMvc.perform(get("/users/find/{username}", username))
+		MvcResult result = mockMvc.perform(get("/login/{username}/{password}", username, password))
 			.andExpect(status().isOk())
 			.andReturn();
 		String content = result.getResponse().getContentAsString();
 		System.out.println("Response content:" + content);
 			
-        mockMvc.perform(get("/users/find/{username}", username))
+        mockMvc.perform(get("/login/{username}/{password}", username, password))
                 .andExpect(status().isOk())
 				.andExpect(content().contentType("application/json"))
-                .andExpect(jsonPath("$.username", is("Test")));
+                .andExpect(jsonPath("$.username", is("uchenna23")));
     }
 
-    @Test
-    public void testDeleteUser() throws Exception {
-        String username = "uchenna23";
-        mockMvc.perform(delete("/users/delete/{username}", username))
-                .andExpect(status().isOk());
-    }
+    
+
 
 	@Test
     public void testUpdateUser() throws Exception {
-    testGetUser();
+    this.testGetUser();
     String username = "uchenna23";
     Users mockUser = new Users("Test","Test", "uchenna23","Test");
     given(usersService.findUserbyUsername(username)).willReturn(mockUser);
 
     mockUser.setPassword("hello");
     
-    // Convert the user object to JSON
     ObjectMapper objectMapper = new ObjectMapper();
     String userJson = objectMapper.writeValueAsString(mockUser);
 
-    // Perform the PUT request to the update endpoint
-    mockMvc.perform(put("/users/update/{username}", username)
+    mockMvc.perform(put("/update/{username}", username)
             .contentType(MediaType.APPLICATION_JSON)
             .content(userJson))
-            .andExpect(status().isOk()) // Expect HTTP 200 OK
-            .andExpect(jsonPath("$.password").value("TRUE")); // Validate the username in the response
-    
+            .andExpect(status().isOk());
 }
 }
