@@ -32,7 +32,8 @@ run git clone https://github.com/your-username/ChennaFlix.git
 run cd /frontend
 
 #### Build and run the Docker containers:
-run docker-compose up --build
+run docker-compose up -d
+
 
 #### Access the application:
 Visit http://localhost:4200 to use the ChennaFlix frontend.
