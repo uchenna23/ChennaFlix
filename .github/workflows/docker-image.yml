@@ -22,7 +22,7 @@ jobs:
 
       - name: Build with Maven
         run: |
-          cd chennaflix/backend  # Move to the directory where the pom.xml is located
+          cd ./backend  # Move to the directory where the pom.xml is located
           mvn package
 
       - name: Set up Docker Buildx
@@ -38,6 +38,6 @@ jobs:
       - name: Build and push Docker image
         uses: docker/build-push-action@v2
         with:
-          context: ./chennaflix/backend
+          context: ./backend
           push: true
           tags: uchenna23/chennaflix-backend:latest
