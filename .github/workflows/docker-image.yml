@@ -38,6 +38,6 @@ jobs:
       - name: Build and push Docker image
         uses: docker/build-push-action@v2
         with:
-          context: ./chennaflix/backend
+          context: ./backend
           push: true
           tags: uchenna23/chennaflix-backend:latest
