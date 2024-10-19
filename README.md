@@ -29,7 +29,7 @@ The ChennaFlix application is fully containerized using Docker, which simplifies
 ### Clone the repository:
 run git clone https://github.com/your-username/ChennaFlix.git
 
-run cd ChennaFlix
+run cd /frontend
 
 #### Build and run the Docker containers:
 run docker-compose up --build
