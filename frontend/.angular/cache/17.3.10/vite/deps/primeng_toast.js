@@ -8,15 +8,6 @@ import {
   RippleModule
 } from "./chunk-UU2NY4HJ.js";
 import {
-  animate,
-  animateChild,
-  query,
-  state,
-  style,
-  transition,
-  trigger
-} from "./chunk-HAUWRP7M.js";
-import {
   MessageService,
   ObjectUtils,
   PrimeNGConfig,
@@ -25,6 +16,15 @@ import {
   UniqueComponentId,
   zindexutils
 } from "./chunk-Y4IRKR76.js";
+import {
+  animate,
+  animateChild,
+  query,
+  state,
+  style,
+  transition,
+  trigger
+} from "./chunk-HAUWRP7M.js";
 import {
   CommonModule,
   DOCUMENT,

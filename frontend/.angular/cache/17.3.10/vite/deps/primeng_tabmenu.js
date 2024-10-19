@@ -1,16 +1,21 @@
 import {
-  Tooltip,
-  TooltipModule
-} from "./chunk-Y26VTAM3.js";
-import {
   ChevronLeftIcon,
   ChevronRightIcon
 } from "./chunk-IJCIDKST.js";
+import {
+  Tooltip,
+  TooltipModule
+} from "./chunk-Y26VTAM3.js";
 import {
   DomHandler,
   Ripple,
   RippleModule
 } from "./chunk-UU2NY4HJ.js";
+import {
+  ObjectUtils,
+  PrimeTemplate,
+  SharedModule
+} from "./chunk-Y4IRKR76.js";
 import {
   ActivatedRoute,
   NavigationEnd,
@@ -21,11 +26,6 @@ import {
 } from "./chunk-HGYN7COY.js";
 import "./chunk-72VLAX47.js";
 import "./chunk-OPUBHGYI.js";
-import {
-  ObjectUtils,
-  PrimeTemplate,
-  SharedModule
-} from "./chunk-Y4IRKR76.js";
 import {
   CommonModule,
   NgClass,

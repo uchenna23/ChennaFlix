@@ -19,6 +19,9 @@ public class Users {
     @Column(name = "password")
     private String password;
 
+    @Column(name = "avatar")
+    private String avatar;
+
 
 
 
@@ -26,12 +29,12 @@ public class Users {
     }
 
 
-    public Users(String first_name, String last_name, String username, String password){
+    public Users(String first_name, String last_name, String username, String password, String avatar){
         this.first_name = first_name;
         this.last_name = last_name;
         this.username = username;
         this.password = password;
-
+        this.avatar = avatar;
     }
 
     public String getFirst_name() {
@@ -57,6 +60,12 @@ public class Users {
     }
     public void setPassword(String password) {
         this.password = password;
+    }
+    public String getAvatar() {
+        return avatar;
+    }
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
     }
 
 

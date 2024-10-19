@@ -35,7 +35,7 @@ public class BackendApplicationTests {
 
     @Test
     public void testCreateUser() throws Exception {
-        Users newUser = new Users("Test", "Test", "uchenna23", "Test123");
+        Users newUser = new Users("Test", "Test", "uchenna23", "Test123","assets/avatars/001-man.png");
         mockMvc.perform(post("/create")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(newUser)))
@@ -47,7 +47,7 @@ public class BackendApplicationTests {
     public void testGetUser() throws Exception {
 		String username = "uchenna23";
         String password = "Test123";
-		Users mockUser = new Users("Test","Test", "uchenna23","Test123");
+		Users mockUser = new Users("Test","Test", "uchenna23","Test123","assets/avatars/001-man.png");
 		given(usersService.findUserbyUsername(username)).willReturn(mockUser);
 
 		MvcResult result = mockMvc.perform(get("/login/{username}/{password}", username, password))
@@ -69,7 +69,7 @@ public class BackendApplicationTests {
     public void testUpdateUser() throws Exception {
     this.testGetUser();
     String username = "uchenna23";
-    Users mockUser = new Users("Test","Test", "uchenna23","Test");
+    Users mockUser = new Users("Test","Test", "uchenna23","Test","assets/avatars/001-man.png");
     given(usersService.findUserbyUsername(username)).willReturn(mockUser);
 
     mockUser.setPassword("hello");

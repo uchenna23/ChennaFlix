@@ -9,7 +9,6 @@ import { FormGroup, FormsModule, ReactiveFormsModule, FormBuilder, Validators  }
 import { MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
 import { UserService } from '../../services/user.service';
-import { UserProfilePageComponent } from '../user-profile-page/user-profile-page.component';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
@@ -18,6 +17,7 @@ interface User{
   password: string;
   first_name: string;
   last_name: string;
+  avatar?: string; 
 }
 
 @Component({
@@ -29,45 +29,62 @@ interface User{
   styleUrl: './home-page.component.scss'
 })
 export class HomePageComponent implements OnInit {
-  formGroup!: FormGroup;  
+  formGroup!: FormGroup;
   newUser: User = {
-    username:  '',
+    username: '',
     password: '',
     first_name: '',
     last_name: '',
-  }
+    avatar: ''
+  };
 
-
+  avatars: string[] = [
+    'assets/avatars/001-man.png',
+    'assets/avatars/002-woman.png',
+    'assets/avatars/003-man.png',
+    'assets/avatars/006-man.png',
+    'assets/avatars/004-woman.png'
+  ];
+  selectedAvatar: string | null = null;
+  userAvatar: string | null = null;
   loginVisible: boolean = false;
-
   createVisible: boolean = false;
-
   isCardVisible: boolean = true;
-  
   value: string | undefined;
-  
   successMessage: string = '';
   errorMessage: string = '';
 
-  constructor(private messageService: MessageService, private userService: UserService, private fb: FormBuilder, private router: Router){}
+  constructor(private messageService: MessageService, private userService: UserService, private fb: FormBuilder, private router: Router) {}
 
-  ngOnInit(): void{
+  ngOnInit(): void {
     this.formGroup = this.fb.group({
       username: ['', Validators.required],
       password: ['', [Validators.required, Validators.minLength(6)]],
       first_name: ['', Validators.required],
-      last_name: ['', Validators.required]
+      last_name: ['', Validators.required],
+      avatar: [''] // Add avatar control
     });
   }
-  
-  createUser(){
-    if(!this.formGroup.valid){
+
+  // Avatar selection
+  selectAvatar(avatar: string) {
+    this.selectedAvatar = avatar;
+    this.formGroup.patchValue({ avatar: avatar });
+  }
+
+  createUser() {
+    if (!this.formGroup.valid) {
       this.missingInfo();
       this.showCreateAccountDialog();
       return;
     }
-    this.userService.createUser(this.formGroup.value)
-    .subscribe(
+
+    const userData = {
+      ...this.formGroup.value,
+      avatar: this.selectedAvatar || 'assets/avatars/001-man.png'
+    };
+
+    this.userService.createUser(userData).subscribe(
       (data) => {
         console.log('Data', data);
         this.accountCreated();
@@ -83,9 +100,8 @@ export class HomePageComponent implements OnInit {
     );
   }
 
-  userLogin(){
-    this.userService.userLogin(this.formGroup.value)
-    .subscribe(
+  userLogin() {
+    this.userService.userLogin(this.formGroup.value).subscribe(
       (data) => {
         console.log('Login successful:', data);
         this.loginSuccess();
@@ -99,7 +115,7 @@ export class HomePageComponent implements OnInit {
         if (error.status === 401) {
           console.error('Login failed: Unauthorized', error);
           this.loginFail();
-        } else{
+        } else {
           console.error('Error:', error);
           this.loginFail();
         }
@@ -113,45 +129,56 @@ export class HomePageComponent implements OnInit {
   resetForm() {
     this.formGroup.reset();
   }
-///Dialog Contorls
-  public showLoginDialog(){
-    this.loginVisible = true;
-  } 
 
-  public showCreateAccountDialog(){
+  // Dialog Controls
+  public showLoginDialog() {
+    this.loginVisible = true;
+  }
+
+  public showCreateAccountDialog() {
     this.createVisible = true;
   }
 
-  //Toast Messages for Login and creating account
-
-  loginSuccess(){
-    this.messageService.add({ severity: 'success', summary: 'Welcome Back', 
-      detail: 'Happy Watching!'});
-  }
-  loginFail(){
-    this.messageService.add({ severity: 'error', summary: 'Error Logging in.', 
-      detail: 'Wrong Username/Password.'});
+  // Toast Messages for Login and creating account
+  loginSuccess() {
+    this.messageService.add({
+      severity: 'success',
+      summary: 'Welcome Back',
+      detail: 'Happy Watching!'
+    });
   }
 
-  accountCreated(){
-    this.messageService.add({ severity: 'success', summary: 'Success', 
-      detail: 'Account Created!'});
+  loginFail() {
+    this.messageService.add({
+      severity: 'error',
+      summary: 'Error Logging in.',
+      detail: 'Wrong Username/Password.'
+    });
   }
 
-  missingInfo(){
-    this.messageService.add({ severity: 'error', summary: 'Error', 
-      detail: 'Some field(s) missing, or Password is not at least 6 characters.', life: 3000});
-  }
-  passwordLength(){
-    this.messageService.add({ severity: 'error', summary: 'Error', 
-      detail: 'Password must be at least 6 characters long.', life: 3000});
-  }
-
-  alreadyExists(){
-    this.messageService.add({ severity: 'error', summary: 'Error', 
-      detail: 'Username already exists', life: 3000});
+  accountCreated() {
+    this.messageService.add({
+      severity: 'success',
+      summary: 'Success',
+      detail: 'Account Created!'
+    });
   }
 
- 
+  missingInfo() {
+    this.messageService.add({
+      severity: 'error',
+      summary: 'Error',
+      detail: 'Some field(s) missing, or Password is not at least 6 characters.',
+      life: 3000
+    });
+  }
 
+  alreadyExists() {
+    this.messageService.add({
+      severity: 'error',
+      summary: 'Error',
+      detail: 'Username already exists',
+      life: 3000
+    });
+  }
 }

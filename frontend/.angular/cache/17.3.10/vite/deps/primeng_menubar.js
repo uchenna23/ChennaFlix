@@ -9,13 +9,6 @@ import {
   RippleModule
 } from "./chunk-UU2NY4HJ.js";
 import {
-  RouterLink,
-  RouterLinkActive,
-  RouterModule
-} from "./chunk-HGYN7COY.js";
-import "./chunk-72VLAX47.js";
-import "./chunk-OPUBHGYI.js";
-import {
   ObjectUtils,
   PrimeNGConfig,
   PrimeTemplate,
@@ -23,6 +16,13 @@ import {
   UniqueComponentId,
   zindexutils
 } from "./chunk-Y4IRKR76.js";
+import {
+  RouterLink,
+  RouterLinkActive,
+  RouterModule
+} from "./chunk-HGYN7COY.js";
+import "./chunk-72VLAX47.js";
+import "./chunk-OPUBHGYI.js";
 import {
   CommonModule,
   DOCUMENT,

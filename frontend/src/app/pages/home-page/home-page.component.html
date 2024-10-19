@@ -10,14 +10,25 @@
     justify-content: center;
     align-items: center;
   }
+
+  /* Style for selected avatar */
+  .selected-avatar {
+    border: 3px solid #4caf50;
+    border-radius: 50%;
+    transform: scale(1.1);
+  }
 </style>
+
 <p-toast></p-toast>
+
 <div class="container">
     <p-card *ngIf="isCardVisible" header="Stream Beyond Limits." subheader="Welcome to ChennaFlix!" [style]="{ width: '400px' }">
         <ng-template pTemplate="footer">
             <div class="loginCard">
-                <p-button (onClick)="showLoginDialog()" label=" Login" />
-                <p-toast></p-toast>
+                <!-- Login Button -->
+                <p-button (onClick)="showLoginDialog()" label="Login" />
+
+                <!-- Login Dialog -->
                 <p-dialog header="Please Login." [modal]="true" [(visible)]="loginVisible" [style]="{ width: '20rem' }" (onHide)="resetForm()">
                     <form [formGroup]="formGroup">
                       <div class="usernameLabel">
@@ -36,12 +47,14 @@
                         <p-button type="button" (onClick)="userLogin()" label="Login"></p-button>
                       </div>
                     </form>
-                  </p-dialog>
-                <body>
-                    OR
-                </body>
+                </p-dialog>
+
+                <p>OR</p>
+
+                <!-- Create Account Button -->
                 <p-button (onClick)="showCreateAccountDialog()" label="Create Account" class="w-full" styleClass="w-full" />
-                <p-toast></p-toast>
+
+                <!-- Create Account Dialog -->
                 <p-dialog header="Create a new account!" [modal]="true" [(visible)]="createVisible" [style]="{ width: '25rem'}" (onHide)="resetForm()">
                     <form [formGroup]="formGroup" (ngSubmit)="createUser()">
                       <div class="usernameLabel">
@@ -65,14 +78,35 @@
                       <div class="lastNameLabel">
                         <label for="lastName">Last Name</label>
                       </div>
-                      <div class="lastnameInput">
+                      <div class="lastNameInput">
                         <input type="text" id="lastName" pInputText formControlName="last_name" />
                       </div>
+
+                      <!-- Avatar Selection Section -->
+                      <<div class="avatarSelection p-grid">
+                        <div *ngFor="let avatar of avatars" class="p-col">
+                          <p-avatar 
+                            [image]="avatar" 
+                            shape="circle" 
+                            size="large"
+                            [styleClass]="avatar === selectedAvatar ? 'selected-avatar' : ''"
+                            (click)="selectAvatar(avatar)"
+                            [ngStyle]="{ cursor: 'pointer' }">
+                          </p-avatar>
+                        </div>
+                      </div>
+                    
+                      <!-- Selected Avatar Preview -->
+                      <div *ngIf="selectedAvatar" class="selected-avatar-preview">
+                        <label>Selected Avatar:</label>
+                        <p-avatar [image]="selectedAvatar" shape="circle" size="xlarge"></p-avatar>
+                      </div>
+
                       <div class="loginButton">
                         <p-button type="submit" label="Create Account"></p-button>
                       </div>
                     </form>
-                </p-dialog>                
+                </p-dialog>
             </div>
         </ng-template>
     </p-card>
