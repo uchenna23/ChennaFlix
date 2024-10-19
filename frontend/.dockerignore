@@ -1,0 +1,15 @@
+# Ignore node modules
+node_modules
+
+# Ignore build output directories
+dist
+
+# Ignore git folder
+.git
+
+# Ignore logs and debug files
+npm-debug.log
+yarn-error.log
+
+# Ignore Dockerfile (you don’t want it in the image)
+Dockerfile
