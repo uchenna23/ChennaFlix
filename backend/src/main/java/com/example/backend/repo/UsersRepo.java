@@ -10,7 +10,6 @@ public interface UsersRepo extends JpaRepository<Users, String> {
 
     Users deleteUserByUsername(String username);
     
-    @Query("SELECT u FROM angular_resume.users u WHERE LOWER(u.username) = LOWER(:username)")
-    Users findUserByUsername(@Param("username")String username);
-
+    @Query("SELECT u FROM Users u WHERE LOWER(u.username) = LOWER(:username)")
+    Users findUserByUsername(@Param("username") String username);
 }

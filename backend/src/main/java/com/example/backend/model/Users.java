@@ -1,11 +1,9 @@
 package com.example.backend.model;
-
-import java.io.Serializable;
 import jakarta.persistence.*;
 
 @Entity
 @Table(name = "users", schema = "angular_resume")
-public class Users implements Serializable {
+public class Users {
 
    
 
