@@ -1,6 +1,7 @@
 services:
   frontend:
-    build: /Users/uchennanwagbara/Documents/Personal Projects/ChennaFlix/frontend
+    build:
+      context: . 
     image: chennaflix-frontend:latest
     container_name: chennaflix-frontend
     ports:
@@ -11,12 +12,13 @@ services:
       - app-network
 
   backend:
-    build: /Users/uchennanwagbara/Documents/Personal Projects/ChennaFlix/backend
+    build:
+      context: ../backend
     image: chennaflix-backend:latest
     container_name: chennaflix-backend
     volumes:
-      - /Users/uchennanwagbara/Documents/Personal Projects/ChennaFlix/backend/src/main:/app/src/main
-      - /Users/uchennanwagbara/Documents/Personal Projects/ChennaFlix/backend/target:/app/target  
+      - ../backend/src/main:/app/src/main
+      - ../backend/target:/app/target     
     ports:
       - "8000:8080"
     environment:
@@ -36,8 +38,8 @@ services:
     ports:
       - "5433:5432"
     volumes:
-      - db-data:/var/lib/postgresql/data 
-      - /Users/uchennanwagbara/Documents/Personal Projects/ChennaFlix/backend/db-init:/docker-entrypoint-initdb.d/
+      - db-data:/var/lib/postgresql/data
+      - ../backend/db-init:/docker-entrypoint-initdb.d/
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U postgres"]
       interval: 10s
