@@ -36,6 +36,6 @@ run docker-compose up -d
 
 
 #### Access the application:
-Visit http://localhost:4200 to use the ChennaFlix frontend.
+Visit http://localhost:4200/home to use the ChennaFlix frontend.
 
 The backend runs on http://localhost:8000 and interacts with the database.
