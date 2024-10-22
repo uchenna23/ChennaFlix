@@ -1,6 +1,8 @@
 package com.example.backend.controller;
 
 import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -39,15 +41,20 @@ public class UsersController {
         
     }
 
-    @GetMapping(value = "/getUser/{username}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Users> getUser(@PathVariable String username){
-        Users user = usersService.findUserbyUsername(username.toLowerCase());
-        if(user == null){
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-        }else{
-            return ResponseEntity.ok(user);
-        }
+    @GetMapping(value = "/getUserAvatar/{username}", produces = MediaType.APPLICATION_JSON_VALUE)
+        public ResponseEntity<Map<String, String>> getAvatar(@PathVariable String username) {
+            Users user = usersService.findUserbyUsername(username.toLowerCase());
+            if (user == null) {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+            } else {
+                 Map<String, String> response = new HashMap<>();
+                 response.put("avatarUrl", user.getAvatar());
+                 return ResponseEntity.ok(response);
     }
+}
+
+
+
 
     @PostMapping("/create")
     public ResponseEntity<?> createUser(@RequestBody Users users){
