@@ -19,8 +19,8 @@
   }
 </style>
 
-<p-toast></p-toast>
 
+<p-toast></p-toast>
 <div class="container">
     <p-card *ngIf="isCardVisible" header="Stream Beyond Limits." subheader="Welcome to ChennaFlix!" [style]="{ width: '400px' }">
         <ng-template pTemplate="footer">
@@ -83,7 +83,8 @@
                       </div>
 
                       <!-- Avatar Selection Section -->
-                      <<div class="avatarSelection p-grid">
+                      <div class="avatarSelection p-grid">
+                        <label>Choose an Avatar!</label>
                         <div *ngFor="let avatar of avatars" class="p-col">
                           <p-avatar 
                             [image]="avatar" 

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
 import { DialogModule } from 'primeng/dialog';
@@ -10,6 +10,7 @@ import { MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
 import { UserService } from '../../services/user.service';
 import { Router } from '@angular/router';
+import { GetAvatarService } from '../../services/get-avatar.service';
 import { CommonModule } from '@angular/common';
 
 interface User{
@@ -17,7 +18,7 @@ interface User{
   password: string;
   first_name: string;
   last_name: string;
-  avatar?: string; 
+  avatar: string; 
 }
 
 @Component({
@@ -29,6 +30,8 @@ interface User{
   styleUrl: './home-page.component.scss'
 })
 export class HomePageComponent implements OnInit {
+  @Output() avatarChange = new EventEmitter<string>();
+  
   formGroup!: FormGroup;
   newUser: User = {
     username: '',
@@ -42,7 +45,7 @@ export class HomePageComponent implements OnInit {
     'assets/avatars/001-man.png',
     'assets/avatars/002-woman.png',
     'assets/avatars/003-man.png',
-    'assets/avatars/006-man.png',
+    'assets/avatars/007-man.png',
     'assets/avatars/004-woman.png'
   ];
   selectedAvatar: string | null = null;
@@ -54,7 +57,8 @@ export class HomePageComponent implements OnInit {
   successMessage: string = '';
   errorMessage: string = '';
 
-  constructor(private messageService: MessageService, private userService: UserService, private fb: FormBuilder, private router: Router) {}
+  constructor(private messageService: MessageService, private userService: UserService, private getAvatarService: GetAvatarService, private fb: FormBuilder, private router: Router) {}
+  
 
   ngOnInit(): void {
     this.formGroup = this.fb.group({
@@ -62,7 +66,7 @@ export class HomePageComponent implements OnInit {
       password: ['', [Validators.required, Validators.minLength(6)]],
       first_name: ['', Validators.required],
       last_name: ['', Validators.required],
-      avatar: [''] // Add avatar control
+      avatar: ['']
     });
   }
 
@@ -103,7 +107,16 @@ export class HomePageComponent implements OnInit {
   userLogin() {
     this.userService.userLogin(this.formGroup.value).subscribe(
       (data) => {
-        console.log('Login successful:', data);
+        this.userService.setLoggedInUsername(data.username);
+        this.userService.getUserAvatar(data.username).subscribe(
+          (avatarUrl) =>{
+            console.log('Fetched Avatar URL:', avatarUrl);
+            this.getAvatarService.updateAvatarUrl(avatarUrl)
+          },
+          (error) =>{
+            console.log("Error", error)
+          }
+        );
         this.loginSuccess();
         this.loginVisible = false;
         this.isCardVisible = false;
@@ -119,9 +132,6 @@ export class HomePageComponent implements OnInit {
           console.error('Error:', error);
           this.loginFail();
         }
-      },
-      () => {
-        console.log('Observable completed');
       }
     );
   }
