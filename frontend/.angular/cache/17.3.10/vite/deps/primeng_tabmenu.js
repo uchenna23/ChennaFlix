@@ -1,16 +1,11 @@
 import {
-  Tooltip,
-  TooltipModule
-} from "./chunk-Y26VTAM3.js";
-import {
   ChevronLeftIcon,
   ChevronRightIcon
-} from "./chunk-IJCIDKST.js";
+} from "./chunk-EFIPK7ZH.js";
 import {
-  DomHandler,
-  Ripple,
-  RippleModule
-} from "./chunk-UU2NY4HJ.js";
+  Tooltip,
+  TooltipModule
+} from "./chunk-XYLPMEYZ.js";
 import {
   ActivatedRoute,
   NavigationEnd,
@@ -18,14 +13,19 @@ import {
   RouterLink,
   RouterLinkActive,
   RouterModule
-} from "./chunk-HGYN7COY.js";
-import "./chunk-72VLAX47.js";
-import "./chunk-OPUBHGYI.js";
+} from "./chunk-IRUP5OU7.js";
+import {
+  DomHandler,
+  Ripple,
+  RippleModule
+} from "./chunk-KUG6FTPO.js";
 import {
   ObjectUtils,
   PrimeTemplate,
   SharedModule
-} from "./chunk-Y4IRKR76.js";
+} from "./chunk-JVZUEOJH.js";
+import "./chunk-IXHLYJC6.js";
+import "./chunk-JEJXFNS5.js";
 import {
   CommonModule,
   NgClass,
@@ -34,7 +34,7 @@ import {
   NgStyle,
   NgTemplateOutlet,
   isPlatformBrowser
-} from "./chunk-JYROAYV4.js";
+} from "./chunk-L2ZH43DM.js";
 import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
@@ -51,7 +51,6 @@ import {
   ViewChildren,
   ViewEncapsulation$1,
   booleanAttribute,
-  filter,
   setClassMetadata,
   signal,
   ɵɵInputTransformsFeature,
@@ -90,7 +89,12 @@ import {
   ɵɵtext,
   ɵɵtextInterpolate,
   ɵɵviewQuery
-} from "./chunk-WMOWVE26.js";
+} from "./chunk-5G54TQOL.js";
+import "./chunk-M7K5A7NJ.js";
+import "./chunk-HDK57S4D.js";
+import {
+  filter
+} from "./chunk-PHCTBKHJ.js";
 
 // node_modules/primeng/fesm2022/primeng-tabmenu.mjs
 var _c0 = ["content"];

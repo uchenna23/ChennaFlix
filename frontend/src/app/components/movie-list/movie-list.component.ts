@@ -26,7 +26,6 @@ export class MovieListComponent {
       (response) => {
         this.popularMovies = response.results;
         this.movieImages = this.tmbdService.mapMoviesToImages(this.popularMovies)
-        console.log('Images',this.movieImages);
       },
       (error) => {
         console.log('Error fetching movies', error);

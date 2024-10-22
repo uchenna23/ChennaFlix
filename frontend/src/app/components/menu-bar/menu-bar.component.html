@@ -1,18 +1,14 @@
-<p-menubar [model]="items">
-    <ng-template pTemplate="start" let-item>
-      <!-- You can define start template content here if needed -->
+<div>
+  <p-menubar [model]="items">
+    <ng-template pTemplate="start">
     </ng-template>
-  
+
     <ng-template pTemplate="end">
       <div class="flex align-items-center gap-2">
-        <input
-          type="text"
-          pInputText
-          placeholder="Search"
-          class="w-8rem sm:w-auto"
-          style="margin-right: 10px;"
-        />
+        <input type="text" pInputText placeholder="Search" class="w-8rem sm:w-auto" />
+        <p-avatar *ngIf="avatarUrl" [image]="avatarUrl" shape="circle"></p-avatar>
+        <p-avatar *ngIf="!avatarUrl" icon="pi pi-user" shape="circle"></p-avatar>
       </div>
     </ng-template>
   </p-menubar>
-  
+</div>
