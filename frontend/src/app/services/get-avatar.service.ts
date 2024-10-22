@@ -7,8 +7,6 @@ import { BehaviorSubject, Observable } from 'rxjs';
 })
 export class GetAvatarService {
 
-  private apiUrl = 'http://localhost:8080';
-
   private avatarUrlSubject = new BehaviorSubject<string | null>(null);
   avatarUrl$ = this.avatarUrlSubject.asObservable();
 
